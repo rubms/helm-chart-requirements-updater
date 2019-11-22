@@ -1,0 +1,6 @@
+name: "requirements-update"
+version: "0.1.0"
+usage: "helm requirements-update <path_to_your_chart>"
+description: "Update the requirements of your chart to the latest version."
+ignoreFlags: false
+command: "$HELM_BIN search | $HELM_PLUGIN_DIR/helm-requirements-updater.py"

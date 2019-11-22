@@ -1,15 +1,23 @@
 # Helm Chart Requirements Updater
-A command to update the requirements in your chart to the latest available option
+
+A Helm plugin to update the requirements in your chart to the latest available version.
+
+## Requirements
+
+* Python 3
+* Helm: installed and inited
+
+## Installation
+
+```
+helm plugin install https://github.com/rubms/helm-chart-requirements-updater
+```
 
 ## Usage
 
-`requirements-updater` is able to parse the output given by `helm search`, using that information to update the requirements in the Helm chart provided as argument:
+`requirements-update` is able to parse the output given by `helm search`, using that information to update the requirements in the Helm chart provided as an argument:
 
 ```bash
 helm repo update
-helm search | helm-requirements-updater.py ./mychart
+helm requirements-update <path_to_your_chart>
 ```
-
-## Pending features
-
-Providing `requirements-updater` as a Helm plugin.
