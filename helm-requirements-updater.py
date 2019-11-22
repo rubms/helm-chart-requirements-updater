@@ -14,21 +14,20 @@ class Chart:
 
 charts = {}
 
-if len(sys.argv) == 1:
-    print("Expected argument: path to helm chart")
+if len(sys.argv) != 3:
+    print("Expected arguments: <path_to_helm_bin> <path_to_helm_chart>")
     sys.exit(1)
 
-#import subprocess
-#completed_process = subprocess.run(["helm", "search"]) #, capture_output=True)
-#for line in completed_process.stdout.splitlines():
-for line in sys.stdin:
+import subprocess
+completed_process = subprocess.run([sys.argv[1], "search"])
+for line in completed_process.stdout.splitlines():
     m = pattern.match(line)
     if m:
         (chart, version) = m.groups()
         (repo, name) = chart.split("/")
         charts[name] = Chart(name, repo, version)
 
-requirements_path = os.path.join(sys.argv[1], "requirements.yaml")
+requirements_path = os.path.join(sys.argv[2], "requirements.yaml")
 if not os.path.isfile(requirements_path):
     print("Cannot find a requirements yaml in the specified chart path.")
     sys.exit(2)
