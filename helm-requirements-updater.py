@@ -20,7 +20,7 @@ if len(sys.argv) != 3:
 
 import subprocess
 completed_process = subprocess.run([sys.argv[1], "search"], stdout=subprocess.PIPE)
-for line in completed_process.stdout.splitlines():
+for line in str(completed_process.stdout).splitlines():
     m = pattern.match(line)
     if m:
         (chart, version) = m.groups()
