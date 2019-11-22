@@ -4,7 +4,7 @@ A Helm plugin to update the requirements in your chart to the latest available v
 
 ## Requirements
 
-* Python 3
+* Python >= 3
 * Helm: installed and inited
 
 ## Installation

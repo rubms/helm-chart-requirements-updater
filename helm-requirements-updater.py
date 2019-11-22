@@ -19,7 +19,7 @@ if len(sys.argv) != 3:
     sys.exit(1)
 
 import subprocess
-completed_process = subprocess.run([sys.argv[1], "search"])
+completed_process = subprocess.run([sys.argv[1], "search"], stdout=subprocess.PIPE)
 for line in completed_process.stdout.splitlines():
     m = pattern.match(line)
     if m:
