@@ -28,7 +28,12 @@ for line in sys.stdin:
         (repo, name) = chart.split("/")
         charts[name] = Chart(name, repo, version)
 
-with open(os.path.join(sys.argv[1], "requirements.yaml")) as f:
+requirements_path = os.path.join(sys.argv[1], "requirements.yaml")
+if not os.path.isfile(requirements_path):
+    print("Cannot find a requirements yaml in the specified chart path.")
+    sys.exit(2)
+
+with open(requirements_path) as f:
     requirements = yaml.load(f)
 
 for dependency in requirements["dependencies"]:
@@ -37,5 +42,5 @@ for dependency in requirements["dependencies"]:
         if dependency["repository"].replace('@', '') == chart.repo:
             dependency["version"] = chart.version
 
-with open(os.path.join(sys.argv[1], "requirements.yaml"), "w") as f:
+with open(requirements_path, "w") as f:
     yaml.dump(requirements, f, default_flow_style=False)
